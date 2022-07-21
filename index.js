@@ -22,7 +22,6 @@ async function sendSVG(req, res) {
         await visit.save();
     }
     let svg = `
-    <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 89.01 20" enable-background="new 0 0 89.01 20" xml:space="preserve">
 <path fill="#A2C93E" d="M85.43,20H3.59C1.61,20,0,18.39,0,16.41V3.59C0,1.61,1.61,0,3.59,0h81.84c1.98,0,3.59,1.61,3.59,3.59v12.83
@@ -32,6 +31,7 @@ async function sendSVG(req, res) {
 <text transform="matrix(1 0 0 1 49.5 13.6)" fill="#FFFFFF" font-family="'Arial'" font-size="10px">${visits}</text>
 </svg>
     `;
+    res.setHeader('Content-Type', 'image/svg+xml');
     res.send(svg);
 }
 
