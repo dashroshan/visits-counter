@@ -11,6 +11,7 @@ async function sendSVG(req, res) {
     const countBG = req.query.countBG || 'A2C93E';
     const visitsText = req.query.visitsText || 'FFFFFF';
     const countText = req.query.countText || 'FFFFFF';
+    const textShadow = req.query.textShadow || '1';
 
     const userName = req.params.userName;
     const visit = await Visits
@@ -27,15 +28,18 @@ async function sendSVG(req, res) {
         await visit.save();
     }
     let width = 54 + ((visits.toString().length - 1) * 5.2);
+    const shadow = `
+    <text transform="matrix(1 0 0 1 6.5 14.4)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
+    <text transform="matrix(1 0 0 1 49.5 14.4)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
+    `
     let svg = `
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 ${width + 7.17} 20" enable-background="new 0 0 ${width + 7.17} 20" xml:space="preserve">
 <path fill="#${countBG}" d="M${width + 3.59},20H3.59C1.61,20,0,18.39,0,16.41V3.59C0,1.61,1.61,0,3.59,0h${width}c1.98,0,3.59,1.61,3.59,3.59v12.83
 	C${width + 7.17},18.39,${width + 5.57},20,${width + 3.59},20z"/>
 <path fill="#${visitsBG}" d="M44.3,0v20H3.77C1.69,20,0,18.39,0,16.41V3.59C0,1.61,1.69,0,3.77,0H44.3z"/>
-<text transform="matrix(1 0 0 1 6.5 14.5)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
+${(textShadow == 1) ? shadow : ''}
 <text transform="matrix(1 0 0 1 6.5 13.6)" fill="#${visitsText}" font-family="'Arial'" font-size="10px">VISITS</text>
-<text transform="matrix(1 0 0 1 49.5 14.5)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
 <text transform="matrix(1 0 0 1 49.5 13.6)" fill="#${countText}" font-family="'Arial'" font-size="10px">${visits}</text>
 </svg>
     `;
