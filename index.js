@@ -33,7 +33,9 @@ async function sendSVG(req, res) {
 <path fill="#${countBG}" d="M${width + 3.59},20H3.59C1.61,20,0,18.39,0,16.41V3.59C0,1.61,1.61,0,3.59,0h${width}c1.98,0,3.59,1.61,3.59,3.59v12.83
 	C${width + 7.17},18.39,${width + 5.57},20,${width + 3.59},20z"/>
 <path fill="#${visitsBG}" d="M44.3,0v20H3.77C1.69,20,0,18.39,0,16.41V3.59C0,1.61,1.69,0,3.77,0H44.3z"/>
+<text transform="matrix(1 0 0 1 6.5 14.5)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
 <text transform="matrix(1 0 0 1 6.5 13.6)" fill="#${visitsText}" font-family="'Arial'" font-size="10px">VISITS</text>
+<text transform="matrix(1 0 0 1 49.5 14.5)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
 <text transform="matrix(1 0 0 1 49.5 13.6)" fill="#${countText}" font-family="'Arial'" font-size="10px">${visits}</text>
 </svg>
     `;
