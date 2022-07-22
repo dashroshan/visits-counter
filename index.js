@@ -51,5 +51,5 @@ app.get('/:userName', (req, res) => {
     sendSVG(req, res);
 });
 
-const port = 1234;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Running on port ${port}...`));

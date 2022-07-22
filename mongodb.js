@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongoDBLink = 'mongodb://localhost/';
+// const mongoDBLink = 'mongodb://localhost/';
+const mongoDBLink = process.env.MONGO;
 
 mongoose.connect(mongoDBLink + 'visitscounter')
     .then(() => console.log('Connected to mongodb...'))
