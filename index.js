@@ -29,8 +29,8 @@ async function sendSVG(req, res) {
     }
     let width = 54 + ((visits.toString().length - 1) * 5.2);
     const shadow = `
-    <text transform="matrix(1 0 0 1 6.5 14.4)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
-    <text transform="matrix(1 0 0 1 49.5 14.4)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 6.5 14.8)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
+    <text transform="matrix(1 0 0 1 49.5 14.8)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
     `
     let svg = `
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
