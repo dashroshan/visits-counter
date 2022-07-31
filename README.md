@@ -14,8 +14,8 @@ https://visits.roshan.cyou/{uniqueID}
 
 ### With modifications
 
-<img src = "https://visits.roshan.cyou/visits?visitsBG=7d0047&countBG=fff200&visitsText=fff200&countText=7d0047&textShadow=0" height = 30px>
+<img src = "https://visits.roshan.cyou/visits?visitsBG=44000D&countBG=DA0037&visitsText=FF6768&countText=FCDAB7&textShadow=0" height = 30px>
 
 ```html
-<img src = "https://visits.roshan.cyou/visits?visitsBG=7d0047&countBG=fff200&visitsText=fff200&countText=7d0047&textShadow=0" height = 30px>
+<img src = "https://visits.roshan.cyou/visits?visitsBG=44000D&countBG=DA0037&visitsText=FF6768&countText=FCDAB7&textShadow=0" height = 30px>
 ```

@@ -6,6 +6,21 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+function shadowColor(bgColor) {
+    var a = 0.3;
+    var r = Math.floor(
+        0x00 * a + Number(`0x${bgColor.substring(0, 2)}`) * (1 - a)
+    );
+    var g = Math.floor(
+        0x00 * a + Number(`0x${bgColor.substring(2, 4)}`) * (1 - a)
+    );
+    var b = Math.floor(
+        0x00 * a + Number(`0x${bgColor.substring(4, 6)}`) * (1 - a)
+    );
+    const finalColor = "#" + ((r << 16) | (g << 8) | b).toString(16);
+    return finalColor;
+};
+
 async function sendSVG(req, res) {
     const visitsBG = req.query.visitsBG || '555555';
     const countBG = req.query.countBG || 'A2C93E';
@@ -27,10 +42,13 @@ async function sendSVG(req, res) {
         });
         await visit.save();
     }
+
     let width = 54 + ((visits.toString().length - 1) * 5.2);
     const shadow = `
-    <text transform="matrix(1 0 0 1 6.5 14.8)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">VISITS</text>
-    <text transform="matrix(1 0 0 1 49.5 14.8)" fill="#000000" opacity="0.3" font-family="'Arial'" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 6.5 14.3)" fill="${shadowColor(visitsBG)}" font-family="Arial" font-size="10px">VISITS</text>
+    <text transform="matrix(1 0 0 1 6.5 15)" fill="${shadowColor(visitsBG)}" font-family="Arial" font-size="10px">VISITS</text>
+    <text transform="matrix(1 0 0 1 49.5 14.3)" fill="${shadowColor(countBG)}" font-family="Arial" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 49.5 15)" fill="${shadowColor(countBG)}" font-family="Arial" font-size="10px">${visits}</text>
     `
     let svg = `
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -39,10 +57,11 @@ async function sendSVG(req, res) {
 	C${width + 7.17},18.39,${width + 5.57},20,${width + 3.59},20z"/>
 <path fill="#${visitsBG}" d="M44.3,0v20H3.77C1.69,20,0,18.39,0,16.41V3.59C0,1.61,1.69,0,3.77,0H44.3z"/>
 ${(textShadow == 1) ? shadow : ''}
-<text transform="matrix(1 0 0 1 6.5 13.6)" fill="#${visitsText}" font-family="'Arial'" font-size="10px">VISITS</text>
-<text transform="matrix(1 0 0 1 49.5 13.6)" fill="#${countText}" font-family="'Arial'" font-size="10px">${visits}</text>
+<text transform="matrix(1 0 0 1 6.5 13.6)" fill="#${visitsText}" font-family="Arial" font-size="10px">VISITS</text>
+<text transform="matrix(1 0 0 1 49.5 13.6)" fill="#${countText}" font-family="Arial" font-size="10px">${visits}</text>
 </svg>
     `;
+
     res.setHeader('Content-Type', 'image/svg+xml');
     res.send(svg);
 }
