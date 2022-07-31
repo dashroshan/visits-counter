@@ -12,5 +12,4 @@ const visitSchema = new mongoose.Schema({
 });
 
 const Link = mongoose.model('visits', visitSchema);
-
 module.exports = Link;
