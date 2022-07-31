@@ -68,4 +68,5 @@ async function process(req, res) {
 }
 
 app.get("/:userName", (req, res) => process(req, res));
+app.get("*", (req, res) => res.redirect('https://github.com/roshan1337d/visits-counter#readme'));
 app.listen(port, () => console.log(`Running on port ${port}...`));
