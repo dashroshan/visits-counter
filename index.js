@@ -5,13 +5,13 @@ const Helpers = require("./helpers");
 
 const approxWidth = Helpers.approxWidth;
 const shadowColor = Helpers.shadowColor;
-const port = (process.env) ? process.env.PORT : 5000;
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-async function process(req, res) {
+async function processSVG(req, res) {
     // Getting values from query
     const visitsBG = req.query.visitsBG || "555555";
     const countBG = req.query.countBG || "A2C93E";
@@ -67,6 +67,6 @@ async function process(req, res) {
     res.send(svg);
 }
 
-app.get("/:userName", (req, res) => process(req, res));
+app.get("/:userName", (req, res) => processSVG(req, res));
 app.get("*", (req, res) => res.redirect('https://github.com/roshan1337d/visits-counter#readme'));
 app.listen(port, () => console.log(`Running on port ${port}...`));
