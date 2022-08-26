@@ -11,6 +11,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Disable caching
+app.use(function (req, res, next) {
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    next()
+});
+
 async function processSVG(req, res) {
     // Getting values from query
     const visitsBG = req.query.visitsBG || "555555";
