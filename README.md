@@ -20,7 +20,7 @@ URL query based fully customizable SVG visits counter badge for github markdown 
 
 ## How to use
 
-Replace the `{uniqueID}` with a random string and use it as your image source. You may use [this tool](http://www.unit-conversion.info/texttools/random-string-generator) to generate an unique random string.
+Replace the `{uniqueID}` with a random string and use it as your image source. You may use [this tool](https://ciprand.p3p.repl.co/api?len=20&count=1) to generate an unique random string.
 
 ```
 https://visits.roshan.cyou/{uniqueID}
