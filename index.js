@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.static(__dirname + '/frontend/build'));
 
 // Disable caching
 app.use(function (req, res, next) {
@@ -76,5 +77,4 @@ async function processSVG(req, res) {
 }
 
 app.get("/:userName", (req, res) => processSVG(req, res));
-app.get("*", (req, res) => res.redirect('https://github.com/roshan1337d/visits-counter#readme'));
 app.listen(port, () => console.log(`Running on port ${port}...`));
