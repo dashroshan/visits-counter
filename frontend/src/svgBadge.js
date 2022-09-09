@@ -23,15 +23,20 @@ const shadowColor = (bgColor) => {
     return finalColor;
 };
 
-function svg(textContentI, textShadowI, visitsBGI, countBGI, visitsTextI, countTextI) {
-    // Getting values from query
-    const visitsBG = visitsBGI.substring(1);
-    const countBG = countBGI.substring(1);
-    const visitsText = visitsTextI.substring(1);
-    const countText = countTextI.substring(1);
-    const textShadow = (textShadowI) ? "1" : "0";
+const processColor = (color) => {
+    if (color[0] === "#") return color.substring(1);
+    else return color;
+}
+
+function svgBadge(textContentI, textShadowI, visitsBGI, countBGI, visitsTextI, countTextI, visitsI) {
+    // Getting values
+    const visitsBG = processColor(visitsBGI);
+    const countBG = processColor(countBGI);
+    const visitsText = processColor(visitsTextI);
+    const countText = processColor(countTextI);
+    const textShadow = (typeof textShadowI === "boolean") ? ((textShadowI) ? "1" : "0") : textShadowI;
     const visitsValue = textContentI;
-    let visits = 12345;
+    const visits = visitsI;
 
     // Calculating text widths
     let visitsWidth = 10 + (approxWidth(visitsValue)) * 10;
@@ -61,4 +66,4 @@ function svg(textContentI, textShadowI, visitsBGI, countBGI, visitsTextI, countT
     return svg;
 }
 
-export default svg;
+module.exports = svgBadge;

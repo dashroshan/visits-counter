@@ -11,17 +11,19 @@ import { MuiColorInput } from 'mui-color-input'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneIcon from '@mui/icons-material/Done';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import PersonIcon from '@mui/icons-material/Person';
 
-import svg from './svg';
+import svgBadge from './svgBadge';
 import SVG from 'react-inlinesvg';
 
 function App() {
     const [formData, setFormData] = useState({ "shadow": true, "text": "VISITS", "visitsBG": "#555555", "countBG": "#A2C93E", "visitsText": "#FFFFFF", "countText": "#FFFFFF" });
-    const [svgData, setSvgData] = useState(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText);
+    const [svgData, setSvgData] = useState();
     const [linkCopied, setLinkCopied] = useState(false);
 
     useEffect(() => {
-        setSvgData(svg(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText));
+        setSvgData(svgBadge(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText, 12345));
     }, [formData]);
 
     const copyToClipboard = (content) => {
@@ -74,6 +76,14 @@ function App() {
                 <MuiColorInput isAlphaHidden={true} format='hex' value={formData.visitsText} onChange={(c) => setFormData({ ...formData, "visitsText": c })} helperText="Colour of the text on left" />
                 <MuiColorInput isAlphaHidden={true} format='hex' value={formData.countText} onChange={(c) => setFormData({ ...formData, "countText": c })} helperText="Colour of the visitor count on right" />
                 <FormControlLabel control={<Switch checked={formData.shadow} onChange={(e) => setFormData({ ...formData, "shadow": !formData.shadow })} />} label="Text shadow" />
+            </div>
+            <div className={classes.bottomLinks}>
+                <Button target="_blank" href="https://github.com/roshan1337d/visits-counter" variant="contained" startIcon={<GitHubIcon />}>
+                    SOURCE CODE
+                </Button>
+                <Button target="_blank" href="https://roshan.cyou" variant="outlined" startIcon={<PersonIcon />}>
+                    AUTHOR
+                </Button>
             </div>
         </div >
     );
