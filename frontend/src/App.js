@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { MuiColorInput } from 'mui-color-input'
+import Tooltip from '@mui/material/Tooltip';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneIcon from '@mui/icons-material/Done';
@@ -21,6 +22,7 @@ function App() {
     const [formData, setFormData] = useState({ "shadow": true, "text": "VISITS", "visitsBG": "#555555", "countBG": "#A2C93E", "visitsText": "#FFFFFF", "countText": "#FFFFFF" });
     const [svgData, setSvgData] = useState();
     const [linkCopied, setLinkCopied] = useState(false);
+    const [codeCopied, setCodeCopied] = useState(false);
 
     useEffect(() => {
         setSvgData(svgBadge(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText, 12345));
@@ -45,6 +47,11 @@ function App() {
         return link;
     }
 
+    const createCode = () => {
+        let imgLink = createLink();
+        return `<a href="https://visits.roshan.cyou"><img src="${imgLink}" alt="Visits Counter Badge" height=30px/></a>`
+    }
+
     return (
         <div className={classes.app}>
             <SVG
@@ -52,15 +59,30 @@ function App() {
                 src={svgData}
                 title="React"
             />
-            <Button variant="contained" disableElevation startIcon={(linkCopied) ? <DoneIcon /> : <ContentCopyIcon />} onClick={() => {
-                setLinkCopied(true);
-                copyToClipboard(createLink());
-                setTimeout(() => {
-                    setLinkCopied(false)
-                }, 2000);
-            }}>
-                {(linkCopied) ? "Image link copied" : "Copy image link"}
-            </Button>
+            <div className={classes.copyButtons}>
+                <Tooltip title="Direct link to the svg badge image" arrow>
+                    <Button variant="contained" disableElevation startIcon={(linkCopied) ? <DoneIcon /> : <ContentCopyIcon />} onClick={() => {
+                        setLinkCopied(true);
+                        copyToClipboard(createLink());
+                        setTimeout(() => {
+                            setLinkCopied(false)
+                        }, 2000);
+                    }}>
+                        {(linkCopied) ? "Link copied" : "Image link"}
+                    </Button>
+                </Tooltip>
+                <Tooltip title="Embed code to use in HTML and Markdown files" arrow>
+                    <Button variant="contained" disableElevation startIcon={(codeCopied) ? <DoneIcon /> : <ContentCopyIcon />} onClick={() => {
+                        setCodeCopied(true);
+                        copyToClipboard(createCode());
+                        setTimeout(() => {
+                            setCodeCopied(false)
+                        }, 2000);
+                    }}>
+                        {(codeCopied) ? "Code copied" : "Embed code"}
+                    </Button>
+                </Tooltip>
+            </div>
             <div className={classes.card}>
                 <div className={classes.customize}>Customizations</div>
                 <TextField
