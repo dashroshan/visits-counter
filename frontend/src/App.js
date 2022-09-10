@@ -86,8 +86,7 @@ function App() {
             <div className={classes.card}>
                 <div className={classes.customize}>Customizations</div>
                 <TextField
-                    required
-                    id="outlined-required"
+                    id="outlined"
                     label="Text"
                     value={formData.text}
                     onChange={(e) => setFormData({ ...formData, "text": e.target.value })}
