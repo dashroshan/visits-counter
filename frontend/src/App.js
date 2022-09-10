@@ -19,7 +19,7 @@ import svgBadge from './svgBadge';
 import SVG from 'react-inlinesvg';
 
 function App() {
-    const [formData, setFormData] = useState({ "shadow": true, "text": "VISITS", "visitsBG": "#555555", "countBG": "#A2C93E", "visitsText": "#FFFFFF", "countText": "#FFFFFF" });
+    const [formData, setFormData] = useState({ "shadow": true, "text": "VISITS", "visitsBG": "#484848", "countBG": "#2574EA", "visitsText": "#FFFFFF", "countText": "#FFFFFF" });
     const [svgData, setSvgData] = useState();
     const [linkCopied, setLinkCopied] = useState(false);
     const [codeCopied, setCodeCopied] = useState(false);
@@ -99,10 +99,10 @@ function App() {
                 <FormControlLabel control={<Switch checked={formData.shadow} onChange={(e) => setFormData({ ...formData, "shadow": !formData.shadow })} />} label="Text shadow" />
             </div>
             <div className={classes.bottomLinks}>
-                <Button target="_blank" href="https://github.com/roshan1337d/visits-counter" variant="contained" startIcon={<GitHubIcon />}>
+                <Button target="_blank" href="https://github.com/roshan1337d/visits-counter" variant="contained" disableElevation startIcon={<GitHubIcon />}>
                     SOURCE CODE
                 </Button>
-                <Button target="_blank" href="https://roshan.cyou" variant="outlined" startIcon={<PersonIcon />}>
+                <Button target="_blank" href="https://roshan.cyou" variant="outlined" disableElevation startIcon={<PersonIcon />}>
                     AUTHOR
                 </Button>
             </div>

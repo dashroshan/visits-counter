@@ -20,8 +20,8 @@ app.use(function (req, res, next) {
 
 async function processSVG(req, res) {
     // Getting values from query
-    const visitsBG = req.query.visitsBG || "555555";
-    const countBG = req.query.countBG || "A2C93E";
+    const visitsBG = req.query.visitsBG || "484848";
+    const countBG = req.query.countBG || "2574EA";
     const visitsText = req.query.visitsText || "FFFFFF";
     const countText = req.query.countText || "FFFFFF";
     const textShadow = req.query.textShadow || "1";
