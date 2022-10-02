@@ -43,7 +43,7 @@ function svgBadge(label, shadow, labelBGColor, countBGColor, labelTextColor, cou
     shadow = (typeof shadow === "boolean") ? ((shadow) ? "1" : "0") : shadow;
 
     // Calculate the text widths
-    let visitsWidth = 10 + (approxWidth(label)) * 10;
+    let visitsWidth = 10 + (approxWidth(label.toString())) * 10;
     let countWidth = 10 + (approxWidth(visits.toString())) * 10;
 
     // Text shadow template
