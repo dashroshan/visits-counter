@@ -33,7 +33,7 @@ async function processSVG(req, res) {
     const shadow = req.query.shadow || "1";
     const label = req.query.label || "VISITS";
     const uniqueID = req.params.uniqueID;
-    const swap = eq.query.swap || "0";
+    const swap = req.query.swap || "0";
 
     // Get the current visits count
     const visits = await database.visitsBadge(uniqueID);
