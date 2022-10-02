@@ -24,10 +24,12 @@ function App() {
     const [linkCopied, setLinkCopied] = useState(false);
     const [codeCopied, setCodeCopied] = useState(false);
 
+    // Update the live preview of the SVG badge when any of the customization options change
     useEffect(() => {
         setSvgData(svgBadge(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText, 12345));
     }, [formData]);
 
+    // Copy given content to the clipboard
     const copyToClipboard = (content) => {
         const el = document.createElement('textarea');
         el.value = content;
@@ -37,16 +39,23 @@ function App() {
         document.body.removeChild(el);
     };
 
+    // Create the badge link with current customizations
     const createLink = () => {
+        // Create a random 20 character long string for the uniqueID
         let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
         let randomStr = "";
         for (let i = 0; i < 20; i++)
             randomStr += charset[Math.floor(Math.random() * charset.length)];
+
+        // HTML encode space to %20 and stuffs like that
         var textContent = encodeURI(formData.text)
+
+        // Create and send the link
         const link = `https://visits.roshan.cyou/${randomStr}?textContent=${textContent}&textShadow=${(formData.shadow) ? 1 : 0}&visitsBG=${formData.visitsBG.substring(1)}&countBG=${formData.countBG.substring(1)}&visitsText=${formData.visitsText.substring(1)}&countText=${formData.countText.substring(1)}`;
         return link;
     }
 
+    // Create the HTML embed code for the badge
     const createCode = () => {
         let imgLink = createLink();
         return `<a href="https://visits.roshan.cyou"><img src="${imgLink}" alt="Visits Counter Badge" height=30px/></a>`
@@ -54,11 +63,14 @@ function App() {
 
     return (
         <div className={classes.app}>
+            {/* SVG badge preview */}
             <SVG
                 className={classes.badge}
                 src={svgData}
                 title="React"
             />
+
+            {/* Buttons to copy image link and html embed code */}
             <div className={classes.copyButtons}>
                 <Tooltip title="Direct link to the svg badge image" arrow>
                     <Button variant="contained" disableElevation startIcon={(linkCopied) ? <DoneIcon /> : <ContentCopyIcon />} onClick={() => {
@@ -83,6 +95,8 @@ function App() {
                     </Button>
                 </Tooltip>
             </div>
+
+            {/* Customizations card */}
             <div className={classes.card}>
                 <div className={classes.customize}>Customizations</div>
                 <TextField
@@ -98,6 +112,8 @@ function App() {
                 <MuiColorInput isAlphaHidden={true} format='hex' value={formData.countText} onChange={(c) => setFormData({ ...formData, "countText": c })} helperText="Colour of the visitor count on right" />
                 <FormControlLabel control={<Switch checked={formData.shadow} onChange={(e) => setFormData({ ...formData, "shadow": !formData.shadow })} />} label="Text shadow" />
             </div>
+
+            {/* Footer with link to the GitHub repo and author site*/}
             <div className={classes.bottomLinks}>
                 <Button target="_blank" href="https://github.com/roshan1337d/visits-counter" variant="contained" disableElevation startIcon={<GitHubIcon />}>
                     SOURCE CODE
