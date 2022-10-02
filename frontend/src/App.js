@@ -1,8 +1,9 @@
-import * as React from 'react';
 import { useState, useEffect } from 'react';
-
 import classes from './App.module.css';
+import svgBadge from './svgBadge';
+import SVG from 'react-inlinesvg';
 
+// MUI Components
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
@@ -10,23 +11,21 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { MuiColorInput } from 'mui-color-input'
 import Tooltip from '@mui/material/Tooltip';
 
+// MUI Icons
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneIcon from '@mui/icons-material/Done';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PersonIcon from '@mui/icons-material/Person';
 
-import svgBadge from './svgBadge';
-import SVG from 'react-inlinesvg';
-
 function App() {
-    const [formData, setFormData] = useState({ "shadow": true, "text": "VISITS", "visitsBG": "#484848", "countBG": "#2574EA", "visitsText": "#FFFFFF", "countText": "#FFFFFF" });
+    const [formData, setFormData] = useState({ "shadow": true, "label": "VISITS", "labelBGColor": "#484848", "countBGColor": "#2574EA", "labelTextColor": "#FFFFFF", "countTextColor": "#FFFFFF" });
     const [svgData, setSvgData] = useState();
     const [linkCopied, setLinkCopied] = useState(false);
     const [codeCopied, setCodeCopied] = useState(false);
 
     // Update the live preview of the SVG badge when any of the customization options change
     useEffect(() => {
-        setSvgData(svgBadge(formData.text, formData.shadow, formData.visitsBG, formData.countBG, formData.visitsText, formData.countText, 12345));
+        setSvgData(svgBadge(formData.label, formData.shadow, formData.labelBGColor, formData.countBGColor, formData.labelTextColor, formData.countTextColor, 12345));
     }, [formData]);
 
     // Copy given content to the clipboard
@@ -48,10 +47,10 @@ function App() {
             randomStr += charset[Math.floor(Math.random() * charset.length)];
 
         // HTML encode space to %20 and stuffs like that
-        var textContent = encodeURI(formData.text)
+        var textContent = encodeURI(formData.label)
 
         // Create and send the link
-        const link = `https://visits.roshan.cyou/${randomStr}?textContent=${textContent}&textShadow=${(formData.shadow) ? 1 : 0}&visitsBG=${formData.visitsBG.substring(1)}&countBG=${formData.countBG.substring(1)}&visitsText=${formData.visitsText.substring(1)}&countText=${formData.countText.substring(1)}`;
+        const link = `https://visits.roshan.cyou/${randomStr}?textContent=${textContent}&textShadow=${(formData.shadow) ? 1 : 0}&visitsBG=${formData.labelBGColor.substring(1)}&countBG=${formData.countBGColor.substring(1)}&visitsText=${formData.labelTextColor.substring(1)}&countText=${formData.countTextColor.substring(1)}`;
         return link;
     }
 
@@ -100,16 +99,16 @@ function App() {
             <div className={classes.card}>
                 <div className={classes.customize}>Customizations</div>
                 <TextField
+                    className={classes.customizeInput}
                     id="outlined"
-                    label="Text"
-                    value={formData.text}
-                    onChange={(e) => setFormData({ ...formData, "text": e.target.value })}
-                    helperText="Text to be displayed on the left side of the counter"
+                    label="Text on the label"
+                    value={formData.label}
+                    onChange={(e) => setFormData({ ...formData, "label": e.target.value })}
                 />
-                <MuiColorInput isAlphaHidden={true} format='hex' value={formData.visitsBG} onChange={(c) => setFormData({ ...formData, "visitsBG": c })} helperText="Background colour of the left part containing the text" />
-                <MuiColorInput isAlphaHidden={true} format='hex' value={formData.countBG} onChange={(c) => setFormData({ ...formData, "countBG": c })} helperText="Background colour of the right part containing the visits count" />
-                <MuiColorInput isAlphaHidden={true} format='hex' value={formData.visitsText} onChange={(c) => setFormData({ ...formData, "visitsText": c })} helperText="Colour of the text on left" />
-                <MuiColorInput isAlphaHidden={true} format='hex' value={formData.countText} onChange={(c) => setFormData({ ...formData, "countText": c })} helperText="Colour of the visitor count on right" />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelBGColor} onChange={(c) => setFormData({ ...formData, "labelBGColor": c })} label="Label background color" />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countBGColor} onChange={(c) => setFormData({ ...formData, "countBGColor": c })} label="Visits count background color" />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelTextColor} onChange={(c) => setFormData({ ...formData, "labelTextColor": c })} label="Label text color" />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countTextColor} onChange={(c) => setFormData({ ...formData, "countTextColor": c })} label="Visits count text color" />
                 <FormControlLabel control={<Switch checked={formData.shadow} onChange={(e) => setFormData({ ...formData, "shadow": !formData.shadow })} />} label="Text shadow" />
             </div>
 

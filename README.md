@@ -4,13 +4,4 @@ Customizable **SVG Visits Counter Badge** for github markdown files and sites. [
 
 ## Demo
 
-<img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE" height = 30px/> <img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE?textContent=Profile+Views&textShadow=0&visitsBG=3e3e3e&countBG=a8a8a8&visitsText=ffffff&countText=000000" height = 30px/> <img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE?textContent=Hit%20Count&textShadow=1&visitsBG=18a0ed&countBG=3e3e3e&visitsText=FFFFFF&countText=ffffff" height = 30px/>
-
-## What can be customized
-
-1. Text shadow.
-2. Text to be displayed on the left side of the counter.
-3. Colour of the text on left.
-4. Colour of the visitor count on right.
-5. Background colour of the left part containing the text.
-6. Background colour of the right part containing the visitor count.
+<img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE" height = 30px/> <img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE?textContent=Profile+Views&shadow=0&labelBGColor=3e3e3e&countBGColor=a8a8a8&labelTextColor=ffffff&countTextColor=000000" height = 30px/> <img src = "https://visits.roshan.cyou/Cdq5ki5Oij5PYNgE?textContent=Hit%20Count&textShadow=1&labelBGColor=18a0ed&countBGColor=3e3e3e&labelTextColor=FFFFFF&countTextColor=ffffff" height = 30px/>

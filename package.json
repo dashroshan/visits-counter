@@ -1,17 +1,13 @@
 {
-  "name": "visits-counter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "mongoose": "^6.4.6"
-  }
+    "name": "visits-counter",
+    "scripts": {
+        "site": "cd frontend && npm run start",
+        "server": "node index.js",
+        "prod": "cd frontend && npm run build && cd .. && nodemon index.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "mongoose": "^6.4.6"
+    }
 }

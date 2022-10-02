@@ -11,6 +11,7 @@
     box-shadow: 0 0 10px rgb(214, 214, 214);
     border-radius: 10px;
     padding: 2rem;
+    padding-bottom: 1rem !important;
     gap: 10px;
     margin: 20px;
 }
@@ -39,4 +40,13 @@
 
 .copyButtons Button:first-of-type {
     margin-right: 0.5rem;
+}
+
+.customizeInput {
+    margin-bottom: 15px !important;
+    width: min(380px, 75vw);
+}
+
+.customizeInput:last-of-type {
+    margin-bottom: 0px !important;
 }
