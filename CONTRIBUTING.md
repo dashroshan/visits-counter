@@ -1,6 +1,6 @@
 # Contributing
 
-I am open to, and grateful for, any contributions made by the community to help develop this discord bot. Please go through this document once completely before you contribute or open a pull request.
+I am open to, and grateful for, any contributions made by the community to help develop this project. Please go through this document once completely before you contribute or open a pull request.
 
 ## Made With
 
@@ -16,8 +16,7 @@ I am open to, and grateful for, any contributions made by the community to help 
 | --- | --- |
 | index.js | Main entry file which starts the backend server |
 | database | mongo.js contains the database opertion, and schema.js contains the document schema |
-| frontend/src | React based customization web tool |
-| frontend/src/svgBadge.js | Creates the SVG badge for both the frontend and backend |
+| frontend | React based customization web tool. The svgBadge.js in src folder creates the SVG badge for both the frontend and backend |
 
 ## config.json
 
