@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 async function processSVG(req, res) {
     // Get values from query and parameter
     const labelBGColor = req.query.labelBGColor || "484848";
-    const countBGColor = req.query.countBGColor || "2574EA";
+    const countBGColor = req.query.countBGColor || "1CA2F1";
     const labelTextColor = req.query.labelTextColor || "FFFFFF";
     const countTextColor = req.query.countTextColor || "FFFFFF";
     const shadow = req.query.shadow || "1";
