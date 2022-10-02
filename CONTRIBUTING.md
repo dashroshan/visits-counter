@@ -32,7 +32,7 @@ This file should be created and placed in the same place as the index.js file. T
 ## Developing
 
 1. Clone this repo
-2. Run `npm run install` once to install all dependencies.
+2. Run `npm install` once to install all dependencies.
 3. Run `npm run site` in one terminal window, and `npm run server` in another terminal window for testing.
 
 ## Submit
