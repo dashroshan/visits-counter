@@ -18,14 +18,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import PersonIcon from '@mui/icons-material/Person';
 
 function App() {
-    const [formData, setFormData] = useState({ "shadow": true, "label": "VISITS", "labelBGColor": "#484848", "countBGColor": "#2574EA", "labelTextColor": "#FFFFFF", "countTextColor": "#FFFFFF" });
+    const [formData, setFormData] = useState({ "shadow": true, "swap": false, "label": "VISITS", "labelBGColor": "#484848", "countBGColor": "#2574EA", "labelTextColor": "#FFFFFF", "countTextColor": "#FFFFFF" });
     const [svgData, setSvgData] = useState();
     const [linkCopied, setLinkCopied] = useState(false);
     const [codeCopied, setCodeCopied] = useState(false);
 
     // Update the live preview of the SVG badge when any of the customization options change
     useEffect(() => {
-        setSvgData(svgBadge(formData.label, formData.shadow, formData.labelBGColor, formData.countBGColor, formData.labelTextColor, formData.countTextColor, 12345));
+        setSvgData(svgBadge(formData.label, formData.shadow, formData.swap, formData.labelBGColor, formData.countBGColor, formData.labelTextColor, formData.countTextColor, 12345));
     }, [formData]);
 
     // Copy given content to the clipboard
@@ -50,7 +50,7 @@ function App() {
         var textContent = encodeURI(formData.label)
 
         // Create and send the link
-        const link = `https://visits.roshan.cyou/${randomStr}?textContent=${textContent}&textShadow=${(formData.shadow) ? 1 : 0}&visitsBG=${formData.labelBGColor.substring(1)}&countBG=${formData.countBGColor.substring(1)}&visitsText=${formData.labelTextColor.substring(1)}&countText=${formData.countTextColor.substring(1)}`;
+        const link = `https://visits.roshan.cyou/${randomStr}?label=${textContent}&shadow=${(formData.shadow) ? 1 : 0}&swap=${(formData.swap) ? 1 : 0}&labelBGColor=${formData.labelBGColor.substring(1)}&countBGColor=${formData.countBGColor.substring(1)}&labelTextColor=${formData.labelTextColor.substring(1)}&countTextColor=${formData.countTextColor.substring(1)}`;
         return link;
     }
 
@@ -105,11 +105,12 @@ function App() {
                     value={formData.label}
                     onChange={(e) => setFormData({ ...formData, "label": e.target.value })}
                 />
-                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelBGColor} onChange={(c) => setFormData({ ...formData, "labelBGColor": c })} label="Label background color" />
-                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countBGColor} onChange={(c) => setFormData({ ...formData, "countBGColor": c })} label="Visits count background color" />
-                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelTextColor} onChange={(c) => setFormData({ ...formData, "labelTextColor": c })} label="Label text color" />
-                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countTextColor} onChange={(c) => setFormData({ ...formData, "countTextColor": c })} label="Visits count text color" />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelBGColor} onChange={(c) => setFormData({ ...formData, "labelBGColor": c })} label={`${formData.swap ? 'Visits count' : 'Label'} background color`} />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countBGColor} onChange={(c) => setFormData({ ...formData, "countBGColor": c })} label={`${!formData.swap ? 'Visits count' : 'Label'} background color`} />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.labelTextColor} onChange={(c) => setFormData({ ...formData, "labelTextColor": c })} label={`${formData.swap ? 'Visits count' : 'Label'} text color`} />
+                <MuiColorInput className={classes.customizeInput} isAlphaHidden={true} format='hex' value={formData.countTextColor} onChange={(c) => setFormData({ ...formData, "countTextColor": c })} label={`${!formData.swap ? 'Visits count' : 'Label'} text color`} />
                 <FormControlLabel control={<Switch checked={formData.shadow} onChange={(e) => setFormData({ ...formData, "shadow": !formData.shadow })} />} label="Text shadow" />
+                <FormControlLabel className={classes.customizeInputSwitch} control={<Switch checked={formData.swap} onChange={(e) => setFormData({ ...formData, "swap": !formData.swap })} />} label="Swap label and visits count" />
             </div>
 
             {/* Footer with link to the GitHub repo and author site*/}

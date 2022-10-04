@@ -50,3 +50,8 @@
 .customizeInput:last-of-type {
     margin-bottom: 0px !important;
 }
+
+.customizeInputSwitch {
+    height: 10px;
+    margin-bottom: 15px;
+}

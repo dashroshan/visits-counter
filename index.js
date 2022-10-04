@@ -39,9 +39,7 @@ async function processSVG(req, res) {
     const visits = await database.visitsBadge(uniqueID);
 
     // Create the SVG Badge
-    let svg = swap === "0"
-        ? svgBadge(label, shadow, labelBGColor, countBGColor, labelTextColor, countTextColor, visits)
-        : svgBadge(visits, shadow, labelBGColor, countBGColor, labelTextColor, countTextColor, label);
+    let svg = svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits);
 
     // Send the SVG Badge
     res.setHeader("Content-Type", "image/svg+xml");
