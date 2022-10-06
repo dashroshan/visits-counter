@@ -1,7 +1,7 @@
 // Get an approximate width of the given string
 const approxWidth = (str) => {
     let size = 0;
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         let s = str[i];
         if ('lij|\' '.includes(s)) size += 37;
         else if ('![]fI.,:;/\\t'.includes(s)) size += 50;
@@ -15,14 +15,27 @@ const approxWidth = (str) => {
     return size * 6 / 1000.0;
 };
 
-// Generate the shadow color when black is mixed in with the bgColor. This is
-// used instead of opacity as multiple texts with the shadowColor are added a
-// little below one another to create a solid long shadow
-const shadowColor = (bgColor) => {
-    var a = 0.3;
-    var r = Math.floor(0x00 * a + Number(`0x${bgColor.substring(0, 2)}`) * (1 - a));
-    var g = Math.floor(0x00 * a + Number(`0x${bgColor.substring(2, 4)}`) * (1 - a));
-    var b = Math.floor(0x00 * a + Number(`0x${bgColor.substring(4, 6)}`) * (1 - a));
+// Get the lightness percentage of any given color
+function lightness(hex) {
+    let result = /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    let r = parseInt(result[1], 16) / 255;
+    let g = parseInt(result[2], 16) / 255;
+    let b = parseInt(result[3], 16) / 255;
+    let max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let l = Math.round((max + min) * 50);
+    return l;
+}
+
+// Generate the shadow color when black or white depending upon relative
+// lightness of bg and text color is mixed in with the bgColor. This is used
+// instead of opacity as multiple texts with the shadowColor are added a little
+// below one another to create a solid long shadow
+const shadowColor = (bgColor, textColor) => {
+    let base = (lightness(bgColor) > lightness(textColor)) ? 0xFF : 0x00;
+    let a = 0.3;
+    let r = Math.floor(base * a + Number(`0x${bgColor.substring(0, 2)}`) * (1 - a));
+    let g = Math.floor(base * a + Number(`0x${bgColor.substring(2, 4)}`) * (1 - a));
+    let b = Math.floor(base * a + Number(`0x${bgColor.substring(4, 6)}`) * (1 - a));
     const finalColor = "#" + ((r << 16) | (g << 8) | b).toString(16);
     return finalColor;
 };
@@ -52,10 +65,10 @@ function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColo
 
     // Text shadow template
     let shadowTemplate = (shadow === "1") ? `
-    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.8206)" fill="${shadowColor(countBGColor)}" font-family="Arial" font-size="10px">${visits}</text>
-    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.1597)" fill="${shadowColor(countBGColor)}" font-family="Arial" font-size="10px">${visits}</text>
-    <text transform="matrix(1 0 0 1 7.0189 14.8425)" fill="${shadowColor(labelBGColor)}" font-family="Arial" font-size="10px">${label}</text>
-    <text transform="matrix(1 0 0 1 7.038 14.1817)" fill="${shadowColor(labelBGColor)}" font-family="Arial" font-size="10px">${label}</text>
+    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.8206)" fill="${shadowColor(countBGColor, countTextColor)}" font-family="Arial" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.1597)" fill="${shadowColor(countBGColor, countTextColor)}" font-family="Arial" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 7.0189 14.8425)" fill="${shadowColor(labelBGColor, labelTextColor)}" font-family="Arial" font-size="10px">${label}</text>
+    <text transform="matrix(1 0 0 1 7.038 14.1817)" fill="${shadowColor(labelBGColor, labelTextColor)}" font-family="Arial" font-size="10px">${label}</text>
     `: '';
 
     // Main SVG template
