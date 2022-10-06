@@ -30,9 +30,9 @@ function lightness(hex) {
 // lightness of bg and text color is mixed in with the bgColor. This is used
 // instead of opacity as multiple texts with the shadowColor are added a little
 // below one another to create a solid long shadow
-const shadowColor = (bgColor, textColor) => {
+const shadowColor = (bgColor, textColor, opacity) => {
     let base = (lightness(bgColor) > lightness(textColor)) ? 0xFF : 0x00;
-    let a = 0.3;
+    let a = opacity/100;
     let r = Math.floor(base * a + Number(`0x${bgColor.substring(0, 2)}`) * (1 - a));
     let g = Math.floor(base * a + Number(`0x${bgColor.substring(2, 4)}`) * (1 - a));
     let b = Math.floor(base * a + Number(`0x${bgColor.substring(4, 6)}`) * (1 - a));
@@ -47,7 +47,7 @@ const processColor = (color) => {
 }
 
 // Generate and return the SVG code for the badge
-function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits) {
+function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits, opacity) {
     // Format the given parameter values
     labelBGColor = processColor(labelBGColor);
     countBGColor = processColor(countBGColor);
@@ -65,10 +65,10 @@ function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColo
 
     // Text shadow template
     let shadowTemplate = (shadow === "1") ? `
-    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.8206)" fill="${shadowColor(countBGColor, countTextColor)}" font-family="Arial" font-size="10px">${visits}</text>
-    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.1597)" fill="${shadowColor(countBGColor, countTextColor)}" font-family="Arial" font-size="10px">${visits}</text>
-    <text transform="matrix(1 0 0 1 7.0189 14.8425)" fill="${shadowColor(labelBGColor, labelTextColor)}" font-family="Arial" font-size="10px">${label}</text>
-    <text transform="matrix(1 0 0 1 7.038 14.1817)" fill="${shadowColor(labelBGColor, labelTextColor)}" font-family="Arial" font-size="10px">${label}</text>
+    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.8206)" fill="${shadowColor(countBGColor, countTextColor, opacity)}" font-family="Arial" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 ${visitsWidth + 10.4} 14.1597)" fill="${shadowColor(countBGColor, countTextColor, opacity)}" font-family="Arial" font-size="10px">${visits}</text>
+    <text transform="matrix(1 0 0 1 7.0189 14.8425)" fill="${shadowColor(labelBGColor, labelTextColor, opacity)}" font-family="Arial" font-size="10px">${label}</text>
+    <text transform="matrix(1 0 0 1 7.038 14.1817)" fill="${shadowColor(labelBGColor, labelTextColor, opacity)}" font-family="Arial" font-size="10px">${label}</text>
     `: '';
 
     // Main SVG template
