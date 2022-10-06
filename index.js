@@ -31,15 +31,16 @@ async function processSVG(req, res) {
     const labelTextColor = req.query.labelTextColor || "FFFFFF";
     const countTextColor = req.query.countTextColor || "FFFFFF";
     const shadow = req.query.shadow || "1";
+    const shadowOpacity = req.query.shadowOpacity || "30";
     const label = req.query.label || "VISITS";
     const uniqueID = req.params.uniqueID;
-    const swap = req.query.swap || "30";
+    const swap = req.query.swap || "0";
 
     // Get the current visits count
     const visits = await database.visitsBadge(uniqueID);
 
     // Create the SVG Badge
-    let svg = svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits);
+    let svg = svgBadge(label, shadow, shadowOpacity, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits);
 
     // Send the SVG Badge
     res.setHeader("Content-Type", "image/svg+xml");

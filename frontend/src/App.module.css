@@ -47,11 +47,21 @@
     width: min(380px, 75vw);
 }
 
-.customizeInput:last-of-type {
+.customizeInput:nth-last-of-type(2) {
     margin-bottom: 0px !important;
 }
 
 .customizeInputSwitch {
     height: 10px;
     margin-bottom: 15px;
+}
+
+.opacityWrap{
+    display: flex;
+    flex-direction: row;
+    white-space:nowrap;
+}
+
+.opacitySlider{
+    transform: translateY(5px);
 }

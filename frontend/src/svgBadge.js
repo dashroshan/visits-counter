@@ -47,7 +47,7 @@ const processColor = (color) => {
 }
 
 // Generate and return the SVG code for the badge
-function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits, opacity) {
+function svgBadge(label, shadow, opacity, swap, labelBGColor, countBGColor, labelTextColor, countTextColor, visits) {
     // Format the given parameter values
     labelBGColor = processColor(labelBGColor);
     countBGColor = processColor(countBGColor);
@@ -55,6 +55,7 @@ function svgBadge(label, shadow, swap, labelBGColor, countBGColor, labelTextColo
     countTextColor = processColor(countTextColor);
     shadow = (typeof shadow === "boolean") ? ((shadow) ? "1" : "0") : shadow;
     swap = (typeof swap === "boolean") ? ((swap) ? "1" : "0") : swap;
+    if(typeof opacity === "string") opacity = parseInt(opacity,10);
 
     // Swap label and visits text if swap parameter is true
     if (swap === '1') [label, visits] = [visits, label];

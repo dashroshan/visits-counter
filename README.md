@@ -13,13 +13,14 @@ Customizable **SVG Visits Counter Badge** for github markdown files and sites. *
 - Visits count background color
 - Label text color
 - Visits count text color
-- Text shadow
+- Text shadow opacity and toggle
 - Label and visits count positions
 
 ## Available Query Parameters
 | **Parameter** | **Values**    | **Customization**                                                            |
 |---------------|---------------|------------------------------------------------------------------------------|
 | shadow        | 1 or 0        | Turns the text shadow for the label and visits count on and off respectively |
+| shadowOpacity | 0 to 100 | Opacity percentage of the text shadow |
 | swap        | 1 or 0        | Swaps the position of label and visits count |
 | labelBGColor  | Hex color code | Changes the background color of label                                        |
 | countBGColor         | Hex color code | Changes the background color of visits count                                 |
@@ -36,5 +37,20 @@ Customizable **SVG Visits Counter Badge** for github markdown files and sites. *
 ```
 
 ## Contributing
+
+<details>
+<summary>Project contributors</summary>
+
+### 
+
+| | **Contribution**|
+| --- | --- |
+| [Alex K](https://github.com/Leetcore) | Fixed a bug in the package.json scripts |
+| [Derzan Chiang](https://github.com/MiTo0o) | Added support for label and visits count swap |
+| [MiTo0o](https://github.com/Misterr-H) | Documented the query parameters |
+| [Nishanth](https://github.com/Nishanth-thunder) | Created the code of conduct |
+| [Isuru Maldeniya](https://github.com/isurumaldeniya) | Made the shadow opacity customizable |
+
+</details>
 
 Wish to contribute? **[Check this out](CONTRIBUTING.md)**
