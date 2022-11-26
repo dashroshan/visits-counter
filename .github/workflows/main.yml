@@ -1,0 +1,24 @@
+name: remote ssh command
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            pm2 delete visitsCounter --silent
+            cd visitsCounter
+            git reset --hard HEAD
+            git clean -f -d
+            git pull
+            npm install --force
+            cd frontend
+            npm run build
+            cd ..
+            pm2 start index.js --name visitsCounter

@@ -1,10 +1,9 @@
 {
     "name": "visits-counter",
     "scripts": {
-        "postinstall": "cd frontend && npm install",
+        "postinstall": "cd frontend && npm install --force",
         "site": "cd frontend && npm run start",
-        "server": "node index.js",
-        "prod": "cd frontend && npm run build && cd .. && nodemon index.js"
+        "server": "node index.js"
     },
     "dependencies": {
         "cors": "^2.8.5",
