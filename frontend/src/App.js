@@ -51,14 +51,14 @@ function App() {
         var textContent = encodeURI(formData.label)
 
         // Create and send the link
-        const link = `https://visits.roshan.cyou/${randomStr}?label=${textContent}&shadow=${(formData.shadow) ? 1 : 0}&shadowOpacity=${formData.shadowOpacity}&swap=${(formData.swap) ? 1 : 0}&labelBGColor=${formData.labelBGColor.substring(1)}&countBGColor=${formData.countBGColor.substring(1)}&labelTextColor=${formData.labelTextColor.substring(1)}&countTextColor=${formData.countTextColor.substring(1)}`;
+        const link = `https://visits.dashroshan.com/${randomStr}?label=${textContent}&shadow=${(formData.shadow) ? 1 : 0}&shadowOpacity=${formData.shadowOpacity}&swap=${(formData.swap) ? 1 : 0}&labelBGColor=${formData.labelBGColor.substring(1)}&countBGColor=${formData.countBGColor.substring(1)}&labelTextColor=${formData.labelTextColor.substring(1)}&countTextColor=${formData.countTextColor.substring(1)}`;
         return link;
     }
 
     // Create the HTML embed code for the badge
     const createCode = () => {
         let imgLink = createLink();
-        return `<a href="https://visits.roshan.cyou"><img src="${imgLink}" alt="Visits Counter Badge" height=30px/></a>`
+        return `<a href="https://visits.dashroshan.com"><img src="${imgLink}" alt="Visits Counter Badge" height=30px/></a>`
     }
 
     return (
@@ -122,7 +122,7 @@ function App() {
                 <Button target="_blank" href="https://github.com/roshan1337d/visits-counter" variant="contained" disableElevation startIcon={<GitHubIcon />}>
                     SOURCE CODE
                 </Button>
-                <Button target="_blank" href="https://roshan.cyou" variant="outlined" disableElevation startIcon={<PersonIcon />}>
+                <Button target="_blank" href="https://dashroshan.com" variant="outlined" disableElevation startIcon={<PersonIcon />}>
                     AUTHOR
                 </Button>
             </div>
